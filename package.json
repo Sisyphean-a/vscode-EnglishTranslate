@@ -3,7 +3,7 @@
   "displayName": "English Translate for Programmers",
   "description": "智能的中英文翻译功能，支持变量命名规范转换",
   "version": "1.0.0",
-  "publisher": "Sisyphean-a",
+  "publisher": "xixifu",
   "repository": {
     "type": "git",
     "url": "https://github.com/Sisyphean-a/vscode-EnglishTranslate.git"
