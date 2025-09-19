@@ -1,5 +1,11 @@
 # English Translate for Programmers
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Sisyphean-a.english-translate)](https://marketplace.visualstudio.com/items?itemName=Sisyphean-a.english-translate)
+[![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/Sisyphean-a.english-translate)](https://marketplace.visualstudio.com/items?itemName=Sisyphean-a.english-translate)
+[![GitHub issues](https://img.shields.io/github/issues/Sisyphean-a/vscode-EnglishTranslate)](https://github.com/Sisyphean-a/vscode-EnglishTranslate/issues)
+[![GitHub stars](https://img.shields.io/github/stars/Sisyphean-a/vscode-EnglishTranslate)](https://github.com/Sisyphean-a/vscode-EnglishTranslate/stargazers)
+
 一个专为程序员设计的VSCode翻译扩展，提供智能的中英文翻译功能和变量命名规范转换。
 
 ## 功能特性
@@ -109,9 +115,34 @@ function getUserInfo() {
 - 命名格式转换
 - 状态栏显示
 
+## 贡献
+
+欢迎贡献代码！请查看 [贡献指南](CONTRIBUTING.md) 了解详细信息。
+
+### 开发者
+- [Sisyphean-a](https://github.com/Sisyphean-a)
+
+### 贡献者
+感谢所有为这个项目做出贡献的开发者！
+
 ## 许可证
 
-MIT License
+本项目基于 [MIT License](LICENSE) 开源。
+
+## 支持
+
+如果这个扩展对你有帮助，请考虑：
+- ⭐ 给项目点个星
+- 🐛 报告问题或建议
+- 🔀 提交 Pull Request
+- 📝 分享给其他开发者
+
+## 相关链接
+
+- [GitHub 仓库](https://github.com/Sisyphean-a/vscode-EnglishTranslate)
+- [VSCode 市场](https://marketplace.visualstudio.com/items?itemName=Sisyphean-a.english-translate)
+- [问题反馈](https://github.com/Sisyphean-a/vscode-EnglishTranslate/issues)
+- [更新日志](CHANGELOG.md)
 
 ---
 

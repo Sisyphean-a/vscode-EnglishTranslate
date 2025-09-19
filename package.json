@@ -3,8 +3,21 @@
   "displayName": "English Translate for Programmers",
   "description": "智能的中英文翻译功能，支持变量命名规范转换",
   "version": "1.0.0",
-  "publisher": "your-publisher-name",
-
+  "publisher": "Sisyphean-a",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sisyphean-a/vscode-EnglishTranslate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sisyphean-a/vscode-EnglishTranslate/issues"
+  },
+  "homepage": "https://github.com/Sisyphean-a/vscode-EnglishTranslate#readme",
+  "license": "MIT",
+  "author": {
+    "name": "Sisyphean-a",
+    "url": "https://github.com/Sisyphean-a"
+  },
+  "icon": "media/icon.png",
   "engines": {
     "vscode": "^1.74.0"
   },
