@@ -1,0 +1,120 @@
+{
+  "name": "english-translate",
+  "displayName": "English Translate for Programmers",
+  "description": "智能的中英文翻译功能，支持变量命名规范转换",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "translate",
+    "translation",
+    "english",
+    "chinese",
+    "programming",
+    "naming",
+    "camelCase",
+    "snake_case"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "englishTranslate.translateSelection",
+        "title": "翻译选中文本",
+        "category": "English Translate"
+      },
+      {
+        "command": "englishTranslate.showNamingOptions",
+        "title": "显示命名建议",
+        "category": "English Translate"
+      },
+      {
+        "command": "englishTranslate.copyToClipboard",
+        "title": "复制到剪贴板",
+        "category": "English Translate"
+      },
+      {
+        "command": "englishTranslate.clearStatusBar",
+        "title": "清空状态栏显示",
+        "category": "English Translate"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "englishTranslate.translateSelection",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "editorTextFocus && editorHasSelection"
+      }
+    ],
+    "configuration": {
+      "title": "English Translate",
+      "properties": {
+        "englishTranslate.autoTranslate": {
+          "type": "boolean",
+          "default": true,
+          "description": "选中文本时自动翻译"
+        },
+        "englishTranslate.displayDuration": {
+          "type": "number",
+          "default": 5000,
+          "description": "状态栏显示时长(毫秒)"
+        },
+        "englishTranslate.statusBarPosition": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right"
+          ],
+          "default": "right",
+          "description": "状态栏显示位置"
+        },
+        "englishTranslate.preferredNamingStyle": {
+          "type": "string",
+          "enum": [
+            "camelCase",
+            "snake_case",
+            "PascalCase"
+          ],
+          "default": "camelCase",
+          "description": "首选命名风格"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "@vscode/test-electron": "^2.2.0",
+    "@vscode/vsce": "^2.15.0",
+    "eslint": "^8.28.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.8.2",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
