@@ -44,10 +44,10 @@
 3. 5秒后自动清空（可配置）
 
 ### 命名建议
-1. 选中中文词汇
-2. 状态栏显示英文翻译和"Create"按钮
-3. 点击按钮查看各种命名格式
-4. 选择格式复制到剪贴板
+1. 选中中文词汇进行翻译
+2. 状态栏显示英文翻译，并提示"点击查看命名建议"
+3. 点击状态栏或通过命令面板调用"显示命名建议"
+4. 选择格式复制到剪贴板或插入到光标位置
 
 ### 快捷键
 - `Ctrl+Shift+T` (Mac: `Cmd+Shift+T`): 翻译选中文本
@@ -74,13 +74,13 @@ function getUserInfo() {
 }
 ```
 
-### 场景2: 中文→英文 + 命名建议
+### 场景2: 中文→英文翻译 + 命名建议
 ```javascript
 // 选中 "用户信息"
-// 状态栏显示: "user info [Create]"
-// 点击后显示:
+// 状态栏显示: "user info - 点击查看命名建议"
+// 点击状态栏或通过命令面板调用"显示命名建议":
 // - camelCase: userInfo
-// - PascalCase: UserInfo  
+// - PascalCase: UserInfo
 // - snake_case: user_info
 // - CONSTANT_CASE: USER_INFO
 // - kebab-case: user-info

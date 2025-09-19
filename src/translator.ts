@@ -1,4 +1,6 @@
-import axios from 'axios';
+import * as https from 'https';
+import * as http from 'http';
+import { URL } from 'url';
 import { LanguageDetector } from './utils/languageDetector';
 import { TextProcessor } from './utils/textProcessor';
 
@@ -73,9 +75,9 @@ export class TranslatorService {
     }
 
     private async callGoogleTranslateAPI(text: string, from: string, to: string): Promise<string> {
-        const url = 'https://translate.googleapis.com/translate_a/single';
-        
-        const params = {
+        const baseUrl = 'https://translate.googleapis.com/translate_a/single';
+
+        const params = new URLSearchParams({
             client: 'gtx',
             sl: from,
             tl: to,
@@ -84,28 +86,68 @@ export class TranslatorService {
             oe: 'UTF-8',
             dj: '1',
             q: text
-        };
+        });
+
+        const url = `${baseUrl}?${params.toString()}`;
 
         try {
-            const response = await axios.get(url, {
-                params,
-                timeout: 10000,
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-                }
-            });
+            const response = await this.makeHttpRequest(url);
+            const data = JSON.parse(response);
 
-            if (response.data && response.data.sentences && response.data.sentences.length > 0) {
-                return response.data.sentences.map((s: any) => s.trans).join('');
+            if (data && data.sentences && data.sentences.length > 0) {
+                return data.sentences.map((s: any) => s.trans).join('');
             } else {
                 throw new Error('Invalid response format');
             }
         } catch (error) {
             console.error('Google Translate API error:', error);
-            
+
             // 如果Google翻译失败，尝试备用方案
             return await this.fallbackTranslate(text, from, to);
         }
+    }
+
+    private makeHttpRequest(url: string): Promise<string> {
+        return new Promise((resolve, reject) => {
+            const parsedUrl = new URL(url);
+            const options = {
+                hostname: parsedUrl.hostname,
+                port: parsedUrl.port || 443,
+                path: parsedUrl.pathname + parsedUrl.search,
+                method: 'GET',
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                },
+                timeout: 10000
+            };
+
+            const req = https.request(options, (res) => {
+                let data = '';
+
+                res.on('data', (chunk) => {
+                    data += chunk;
+                });
+
+                res.on('end', () => {
+                    if (res.statusCode === 200) {
+                        resolve(data);
+                    } else {
+                        reject(new Error(`HTTP ${res.statusCode}: ${res.statusMessage}`));
+                    }
+                });
+            });
+
+            req.on('error', (error) => {
+                reject(error);
+            });
+
+            req.on('timeout', () => {
+                req.destroy();
+                reject(new Error('Request timeout'));
+            });
+
+            req.end();
+        });
     }
 
     private async fallbackTranslate(text: string, from: string, to: string): Promise<string> {

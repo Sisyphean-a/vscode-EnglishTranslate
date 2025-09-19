@@ -40,29 +40,23 @@ export class StatusBarManager implements vscode.Disposable {
         const tooltip = this.createTooltip(result);
 
         this.statusBarItem.text = `$(globe) ${displayText}`;
-        this.statusBarItem.tooltip = tooltip;
-        this.statusBarItem.command = undefined;
+
+        // 如果是中文翻译成英文，设置点击命令和提示
+        if (result.sourceLanguage === 'zh' && result.targetLanguage === 'en') {
+            this.statusBarItem.tooltip = `${tooltip} - 点击查看命名建议`;
+            this.statusBarItem.command = 'englishTranslate.showNamingOptions';
+        } else {
+            this.statusBarItem.tooltip = tooltip;
+            this.statusBarItem.command = undefined;
+        }
+
         this.isDisplaying = true;
 
         // 设置基于选区的自动清除逻辑
         this.scheduleSelectionBasedClear(duration);
     }
 
-    showNamingButton(englishText: string): void {
-        // 清除之前的定时器
-        this.clearTimer && clearTimeout(this.clearTimer);
-        this.selectionCheckTimer && clearTimeout(this.selectionCheckTimer);
 
-        this.statusBarItem.text = `$(globe) ${englishText} $(add)`;
-        this.statusBarItem.tooltip = '点击查看命名建议';
-        this.statusBarItem.command = 'englishTranslate.showNamingOptions';
-        this.isDisplaying = true;
-
-        // 延长显示时间，但仍然基于选区状态
-        const config = vscode.workspace.getConfiguration('englishTranslate');
-        const duration = config.get<number>('displayDuration', 5000);
-        this.scheduleSelectionBasedClear(duration * 2);
-    }
 
     showLoading(): void {
         this.clearTimer && clearTimeout(this.clearTimer);

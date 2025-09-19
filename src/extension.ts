@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { TranslatorService } from './translator';
+import { TranslatorService, TranslationResult } from './translator';
 import { StatusBarManager } from './ui/statusBar';
 import { NameGenerator } from './nameGenerator';
 import { NamingPanel } from './ui/namingPanel';
@@ -8,6 +8,7 @@ let translatorService: TranslatorService;
 let statusBarManager: StatusBarManager;
 let nameGenerator: NameGenerator;
 let namingPanel: NamingPanel;
+let lastTranslationResult: TranslationResult | null = null;
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('English Translate extension is now active!');
@@ -92,14 +93,12 @@ async function translateSelectedText(text?: string): Promise<void> {
 
         // 执行翻译
         const result = await translatorService.translate(selectedText);
-        
+
+        // 保存最近的翻译结果
+        lastTranslationResult = result;
+
         // 显示翻译结果
         statusBarManager.showTranslation(result);
-
-        // 如果是中文翻译成英文，显示命名建议按钮
-        if (result.sourceLanguage === 'zh' && result.targetLanguage === 'en') {
-            statusBarManager.showNamingButton(result.translatedText);
-        }
 
     } catch (error) {
         console.error('Translation error:', error);
@@ -108,34 +107,52 @@ async function translateSelectedText(text?: string): Promise<void> {
 }
 
 async function showNamingOptions(): Promise<void> {
-    const editor = vscode.window.activeTextEditor;
-    if (!editor) {
-        return;
-    }
+    let englishText = '';
 
-    const selection = editor.selection;
-    if (selection.isEmpty) {
-        vscode.window.showWarningMessage('请先选择要生成命名的文本');
-        return;
-    }
-
-    const selectedText = editor.document.getText(selection).trim();
-    
-    try {
-        // 先翻译成英文
-        const result = await translatorService.translate(selectedText);
-        let englishText = result.translatedText;
-        
-        if (result.sourceLanguage === 'en') {
-            englishText = selectedText;
+    // 优先使用最近的翻译结果（如果是中文翻译成英文）
+    if (lastTranslationResult &&
+        lastTranslationResult.sourceLanguage === 'zh' &&
+        lastTranslationResult.targetLanguage === 'en') {
+        englishText = lastTranslationResult.translatedText;
+    } else {
+        // 如果没有合适的翻译结果，尝试从当前选择获取
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            vscode.window.showWarningMessage('请先翻译一些中文文本或选择要生成命名的文本');
+            return;
         }
 
+        const selection = editor.selection;
+        if (selection.isEmpty) {
+            vscode.window.showWarningMessage('请先翻译一些中文文本或选择要生成命名的文本');
+            return;
+        }
+
+        const selectedText = editor.document.getText(selection).trim();
+
+        try {
+            // 翻译成英文
+            const result = await translatorService.translate(selectedText);
+            englishText = result.sourceLanguage === 'en' ? selectedText : result.translatedText;
+        } catch (error) {
+            console.error('Translation error:', error);
+            vscode.window.showErrorMessage('翻译失败，无法生成命名建议');
+            return;
+        }
+    }
+
+    try {
         // 生成命名选项
         const namingOptions = nameGenerator.generateNamingOptions(englishText);
-        
+
+        if (namingOptions.length === 0) {
+            vscode.window.showInformationMessage('无法为此文本生成命名建议');
+            return;
+        }
+
         // 显示命名面板
         await namingPanel.show(namingOptions);
-        
+
     } catch (error) {
         console.error('Naming options error:', error);
         vscode.window.showErrorMessage('生成命名建议失败');

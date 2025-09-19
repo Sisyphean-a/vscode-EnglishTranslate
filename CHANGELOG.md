@@ -5,7 +5,28 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## [1.0.0] - 2024-01-XX
+## [1.0.1]
+
+### 修复
+- 🐛 修复了 "Cannot find module 'axios'" 错误
+  - 将axios替换为Node.js原生HTTPS模块
+  - 移除了外部依赖，提高扩展稳定性
+- 🐛 修复了配置属性注册冲突错误
+  - 统一了publisher字段为"Sisyphean-a"
+  - 解决了"englishTranslate.displayDuration"属性冲突问题
+
+### 变更
+- 🔄 改进了命名建议功能的交互方式
+  - 移除了有bug的"+"按钮
+  - 现在可以直接点击翻译结果调用命名建议
+  - 修复了"请先选择单词"的错误提示问题
+  - 命名建议功能使用最近的翻译结果，避免选择状态丢失
+- 📦 优化了扩展打包方式
+  - 使用原生模块替代第三方依赖
+  - 移除了不需要的webpack相关依赖
+  - 减小了扩展包大小和node_modules体积
+
+## [1.0.0]
 
 ### 新增
 - 🌐 智能中英文翻译功能
