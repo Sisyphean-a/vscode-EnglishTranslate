@@ -70,10 +70,10 @@ code --install-extension english-translate-1.0.0.vsix
 
 在VSCode设置中可以配置以下选项：
 
-- `englishTranslate.autoTranslate`: 是否自动翻译选中文本
-- `englishTranslate.displayDuration`: 状态栏显示时长
-- `englishTranslate.statusBarPosition`: 状态栏显示位置
-- `englishTranslate.preferredNamingStyle`: 首选命名风格
+- `xixifuTranslate.autoTranslate`: 是否自动翻译选中文本
+- `xixifuTranslate.displayDuration`: 状态栏显示时长
+- `xixifuTranslate.statusBarPosition`: 状态栏显示位置
+- `xixifuTranslate.preferredNamingStyle`: 首选命名风格
 
 ## 故障排除
 

@@ -16,7 +16,7 @@ export class StatusBarManager implements vscode.Disposable {
 
     constructor() {
         // 获取配置
-        const config = vscode.workspace.getConfiguration('englishTranslate');
+        const config = vscode.workspace.getConfiguration('xixifuTranslate');
         const position = config.get<string>('statusBarPosition', 'right');
         
         const alignment = position === 'left' 
@@ -28,7 +28,7 @@ export class StatusBarManager implements vscode.Disposable {
     }
 
     showTranslation(result: TranslationResult): void {
-        const config = vscode.workspace.getConfiguration('englishTranslate');
+        const config = vscode.workspace.getConfiguration('xixifuTranslate');
         const duration = config.get<number>('displayDuration', 5000);
 
         // 清除之前的定时器
@@ -44,7 +44,7 @@ export class StatusBarManager implements vscode.Disposable {
         // 如果是中文翻译成英文，设置点击命令和提示
         if (result.sourceLanguage === 'zh' && result.targetLanguage === 'en') {
             this.statusBarItem.tooltip = `${tooltip} - 点击查看命名建议`;
-            this.statusBarItem.command = 'englishTranslate.showNamingOptions';
+            this.statusBarItem.command = 'xixifuTranslate.showNamingOptions';
         } else {
             this.statusBarItem.tooltip = tooltip;
             this.statusBarItem.command = undefined;

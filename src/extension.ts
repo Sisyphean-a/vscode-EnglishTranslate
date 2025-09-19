@@ -20,26 +20,26 @@ export function activate(context: vscode.ExtensionContext) {
     namingPanel = new NamingPanel(context);
 
     // 注册命令
-    const translateCommand = vscode.commands.registerCommand('englishTranslate.translateSelection', async () => {
+    const translateCommand = vscode.commands.registerCommand('xixifuTranslate.translateSelection', async () => {
         await translateSelectedText();
     });
 
-    const showNamingCommand = vscode.commands.registerCommand('englishTranslate.showNamingOptions', async () => {
+    const showNamingCommand = vscode.commands.registerCommand('xixifuTranslate.showNamingOptions', async () => {
         await showNamingOptions();
     });
 
-    const copyCommand = vscode.commands.registerCommand('englishTranslate.copyToClipboard', async (text: string) => {
+    const copyCommand = vscode.commands.registerCommand('xixifuTranslate.copyToClipboard', async (text: string) => {
         await vscode.env.clipboard.writeText(text);
         vscode.window.showInformationMessage('已复制到剪贴板');
     });
 
-    const clearStatusBarCommand = vscode.commands.registerCommand('englishTranslate.clearStatusBar', () => {
+    const clearStatusBarCommand = vscode.commands.registerCommand('xixifuTranslate.clearStatusBar', () => {
         statusBarManager.clear();
     });
 
     // 监听文本选择变化
     const selectionChangeListener = vscode.window.onDidChangeTextEditorSelection(async (event) => {
-        const config = vscode.workspace.getConfiguration('englishTranslate');
+        const config = vscode.workspace.getConfiguration('xixifuTranslate');
         const autoTranslate = config.get<boolean>('autoTranslate', true);
         
         if (autoTranslate && event.selections.length > 0) {

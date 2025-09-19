@@ -3,7 +3,7 @@
   "displayName": "English Translate for Programmers",
   "description": "智能的中英文翻译功能，支持变量命名规范转换",
   "version": "1.0.1",
-  "publisher": "Sisyphean-a",
+  "publisher": "xixifu",
   "repository": {
     "type": "git",
     "url": "https://github.com/Sisyphean-a/vscode-EnglishTranslate.git"
@@ -41,29 +41,29 @@
   "contributes": {
     "commands": [
       {
-        "command": "englishTranslate.translateSelection",
+        "command": "xixifuTranslate.translateSelection",
         "title": "翻译选中文本",
         "category": "English Translate"
       },
       {
-        "command": "englishTranslate.showNamingOptions",
+        "command": "xixifuTranslate.showNamingOptions",
         "title": "显示命名建议",
         "category": "English Translate"
       },
       {
-        "command": "englishTranslate.copyToClipboard",
+        "command": "xixifuTranslate.copyToClipboard",
         "title": "复制到剪贴板",
         "category": "English Translate"
       },
       {
-        "command": "englishTranslate.clearStatusBar",
+        "command": "xixifuTranslate.clearStatusBar",
         "title": "清空状态栏显示",
         "category": "English Translate"
       }
     ],
     "keybindings": [
       {
-        "command": "englishTranslate.translateSelection",
+        "command": "xixifuTranslate.translateSelection",
         "key": "ctrl+shift+t",
         "mac": "cmd+shift+t",
         "when": "editorTextFocus && editorHasSelection"
@@ -72,17 +72,17 @@
     "configuration": {
       "title": "English Translate",
       "properties": {
-        "englishTranslate.autoTranslate": {
+        "xixifuTranslate.autoTranslate": {
           "type": "boolean",
           "default": true,
           "description": "选中文本时自动翻译"
         },
-        "englishTranslate.displayDuration": {
+        "xixifuTranslate.displayDuration": {
           "type": "number",
           "default": 5000,
           "description": "状态栏显示时长(毫秒)"
         },
-        "englishTranslate.statusBarPosition": {
+        "xixifuTranslate.statusBarPosition": {
           "type": "string",
           "enum": [
             "left",
@@ -91,7 +91,7 @@
           "default": "right",
           "description": "状态栏显示位置"
         },
-        "englishTranslate.preferredNamingStyle": {
+        "xixifuTranslate.preferredNamingStyle": {
           "type": "string",
           "enum": [
             "camelCase",

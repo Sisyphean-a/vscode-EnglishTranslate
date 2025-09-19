@@ -56,10 +56,10 @@
 
 ```json
 {
-  "englishTranslate.autoTranslate": true,          // 自动翻译
-  "englishTranslate.displayDuration": 5000,       // 显示时长(毫秒)
-  "englishTranslate.statusBarPosition": "right",  // 状态栏位置
-  "englishTranslate.preferredNamingStyle": "camelCase" // 首选命名风格
+  "xixifuTranslate.autoTranslate": true,          // 自动翻译
+  "xixifuTranslate.displayDuration": 5000,       // 显示时长(毫秒)
+  "xixifuTranslate.statusBarPosition": "right",  // 状态栏位置
+  "xixifuTranslate.preferredNamingStyle": "camelCase" // 首选命名风格
 }
 ```
 

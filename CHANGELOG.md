@@ -11,9 +11,12 @@
 - 🐛 修复了 "Cannot find module 'axios'" 错误
   - 将axios替换为Node.js原生HTTPS模块
   - 移除了外部依赖，提高扩展稳定性
-- 🐛 修复了配置属性注册冲突错误
-  - 统一了publisher字段为"Sisyphean-a"
-  - 解决了"englishTranslate.displayDuration"属性冲突问题
+- 🐛 修复了配置属性和命令注册冲突错误
+  - 确保了publisher字段与Marketplace账户一致("xixifu")
+  - 将所有配置属性名称从"englishTranslate.*"更改为"xixifuTranslate.*"
+  - 将所有命令名称从"englishTranslate.*"更改为"xixifuTranslate.*"
+  - 彻底解决了扩展ID冲突问题
+  - 建议用户完全卸载旧版本后再安装新版本
 
 ### 变更
 - 🔄 改进了命名建议功能的交互方式
