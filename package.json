@@ -2,7 +2,7 @@
   "name": "english-translate",
   "displayName": "English Translate for Programmers",
   "description": "智能的中英文翻译功能，支持变量命名规范转换",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "publisher": "xixifu",
   "repository": {
     "type": "git",
